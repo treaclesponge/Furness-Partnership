@@ -281,7 +281,15 @@ function theme_views_slideshow_controls_widget_render($vars) {
   drupal_add_js($js_vars, 'setting');
 
   $output = '';
-  if (empty($vars['settings']['hide_on_single_slide']) && count($vars['rows']) > 1) {
+  if(isset($vars['view']->style_options['views_slideshow_cycle']['items_per_slide'])){
+    $items_per_slide = $vars['view']->style_options['views_slideshow_cycle']['items_per_slide'];
+  }else{
+    $items_per_slide = 1;
+  }
+
+  $slide_number = count($vars['rows'])/$items_per_slide;
+  
+  if (empty($vars['settings']['hide_on_single_slide']) || $slide_number > 1) {
     $output = theme($vars['settings']['type'], array('vss_id' => $vars['vss_id'], 'view' => $vars['view'], 'settings' => $vars['settings'], 'location' => $vars['location'], 'rows' => $vars['rows']));
   }
 
