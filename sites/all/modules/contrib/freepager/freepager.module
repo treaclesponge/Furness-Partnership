@@ -69,7 +69,7 @@ function freepager_preprocess_views_freepager(&$vars) {
       if ($field_names['previous']) {
       	_freepager_render_req_fields($view, $row_number - 1);
         $vars['previous'] = $view->render_field($field_names['previous'], $row_number - 1);
-        $vars['previous_linked'] = l($vars['previous'], $view->render_field($field_names['path'], $row_number - 1), array('html' => TRUE));
+        $vars['previous_linked'] = l($vars['previous'], $view->render_field($field_names['path'], $row_number - 1), array('html' => TRUE, 'attributes' => array('title' => 'Previous project')));
       }
       if ($field_names['current']) {
       	_freepager_render_req_fields($view, $row_number);
@@ -79,7 +79,7 @@ function freepager_preprocess_views_freepager(&$vars) {
       if ($field_names['next']) {
       	_freepager_render_req_fields($view, $row_number + 1);
         $vars['next'] = $view->render_field($field_names['next'], $row_number + 1);
-        $vars['next_linked'] = l($vars['next'], $view->render_field($field_names['path'], $row_number + 1), array('html' => TRUE));
+        $vars['next_linked'] = l($vars['next'], $view->render_field($field_names['path'], $row_number + 1), array('html' => TRUE, 'attributes' => array('title' => 'Next project')));
       }
       $vars['row_number'] = $row_number;
       $vars['total_rows'] = count($view->result);
