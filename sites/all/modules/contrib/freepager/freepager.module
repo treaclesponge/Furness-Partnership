@@ -47,7 +47,18 @@ function freepager_preprocess_views_freepager(&$vars) {
   }
 
   $current_path = implode('/', arg());
-
+  $current_node_id = arg(1);
+  $node = node_load($current_node_id);
+  
+  $temp_array = array();
+  foreach($view->result as $key => $item) {
+    if($item->_field_data['nid']['entity']->field_page['und'][0]['target_id'] == $node->field_page['und']['0']['target_id']) {
+      $temp_array[] = $item;
+    }
+  }
+  $view->result = array();
+  $view->result = $temp_array;
+//   print_r($view->result);
   // Let's go see if we're looking at a page matching the provided paths.
   foreach (array_keys($view->result) as $row_number) {
 
